@@ -1,10 +1,12 @@
-FROM python:3.10-alpine AS base
+FROM python:3.10 AS base
 
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
 FROM base AS train
+
+RUN mkdir data outputs
 
 RUN curl https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data --output data/iris.csv
 
