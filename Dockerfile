@@ -1,4 +1,4 @@
-FROM conda/miniconda3 AS base
+FROM python:3.10-alpine AS base
 
 COPY requirements.txt .
 
