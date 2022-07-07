@@ -6,6 +6,8 @@ RUN pip install -r requirements.txt
 
 FROM base AS train
 
+RUN pip install google-cloud-storage
+
 RUN mkdir data outputs
 
 RUN curl https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data --output data/iris.csv
