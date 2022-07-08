@@ -11,11 +11,12 @@ from sklearn.model_selection import train_test_split
 # noinspection PyPackageRequirements
 from google.cloud import storage
 
-BUCKET = os.environ['GCLOUD_BUCKET']
+PROJECT_ID = os.environ.get("CLOUD_ML_PROJECT_ID", None)
+BUCKET = os.environ.get('GCLOUD_BUCKET')
 OUTPUT_DIR = 'outputs'
 MODEL_PATH = os.path.join(OUTPUT_DIR, 'model.pkl')
 
-bucket = storage.Client().bucket(BUCKET)
+bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
 blob = bucket.blob('iris-test/model.pkl')
 
 
