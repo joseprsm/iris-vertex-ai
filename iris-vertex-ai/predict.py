@@ -14,7 +14,7 @@ PROJECT_ID = os.environ.get("CLOUD_ML_PROJECT_ID", None)
 BUCKET = os.environ.get('GCLOUD_BUCKET')
 
 bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
-blob = bucket.blob('iris-test/model.pkl')
+blob = bucket.blob('iris-test/model/model.pkl')
 blob.download_to_filename('model.pkl')
 
 

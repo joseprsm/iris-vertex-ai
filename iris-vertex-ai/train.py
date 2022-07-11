@@ -17,7 +17,7 @@ OUTPUT_DIR = 'outputs'
 MODEL_PATH = os.path.join(OUTPUT_DIR, 'model.pkl')
 
 bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
-blob = bucket.blob('iris-test/model.pkl')
+blob = bucket.blob('iris-test/model/model.pkl')
 
 
 @click.command
