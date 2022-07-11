@@ -6,8 +6,6 @@ RUN pip install -r requirements.txt
 
 FROM base AS train
 
-RUN pip install google-cloud-storage
-
 RUN mkdir data outputs
 
 RUN curl https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data --output data/iris.csv
@@ -15,3 +13,9 @@ RUN curl https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.dat
 COPY iris-vertex-ai/train.py train.py
 
 ENTRYPOINT ["python", "train.py", "--data-path", "data/iris.csv"]
+
+FROM base AS predict
+
+COPY iris-vertex-ai/predict.py predict.py
+
+ENTRYPOINT ["uvicorn", "predict:app", "--reload", "--host=0.0.0.0"]
