@@ -35,3 +35,6 @@ async def predict(example: Example):
     return {'predictions': prediction.astype(int).tolist()}
 
 
+@app.get('/health')
+async def health():
+    return {'message': 'ok'}
