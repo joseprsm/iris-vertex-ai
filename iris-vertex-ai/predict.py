@@ -1,5 +1,8 @@
+from typing import Optional
+
 import os
 import pickle
+
 import numpy as np
 
 from fastapi import FastAPI
@@ -25,7 +28,7 @@ with open('model.pkl', 'rb') as f:
 class Example(BaseModel):
 
     instances: list
-    parameters: dict
+    parameters: Optional[dict]
 
 
 @app.post('/predict')
