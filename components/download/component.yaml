@@ -1,0 +1,17 @@
+name: Iris data set download
+
+outputs:
+- {name: data}
+
+implementation:
+  container:
+    image: curlimages/curl
+    command:
+    - sh
+    - -c
+    - |
+      set -e -x -o pipefail
+      output_path="$0"
+      mkdir -p "$(dirname "$output_path")"
+      curl --get https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data > "$output_path"
+    - {outputPath: data}

@@ -6,3 +6,5 @@ pydantic~=1.9.1
 numpy~=1.23.0
 uvicorn
 google-cloud-storage
+google-cloud-aiplatform
+kfp

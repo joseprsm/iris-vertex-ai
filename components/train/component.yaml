@@ -1,5 +1,12 @@
 name: train
 
+inputs:
+  - {name: training_data, type: CSV}
+
 implementation:
   container:
     image: ...
+    command: ["python", "train.py"]
+    args:
+      - --data-path
+      - {inputPath: training_data}
