@@ -13,7 +13,7 @@ RUN mkdir data outputs
 
 RUN curl https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data --output data/iris.csv
 
-COPY iris-vertex-ai/train.py train.py
+COPY components/train/task.py train.py
 
 ENTRYPOINT ["python", "train.py", "--data-path", "data/iris.csv"]
 
@@ -22,6 +22,6 @@ FROM base AS predict
 ARG BUCKET
 ENV GCLOUD_BUCKET=$BUCKET
 
-COPY iris-vertex-ai/predict.py predict.py
+COPY components/predict/task.py predict.py
 
 ENTRYPOINT ["uvicorn", "predict:app", "--reload", "--host=0.0.0.0"]
