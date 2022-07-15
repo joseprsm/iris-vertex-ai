@@ -1,5 +1,0 @@
-name: predict
-
-implementation:
-  container:
-    image: ...

@@ -15,9 +15,10 @@ app = FastAPI()
 
 PROJECT_ID = os.environ.get("CLOUD_ML_PROJECT_ID", None)
 BUCKET = os.environ.get('GCLOUD_BUCKET')
+MODEL_URI = os.environ.get('MODEL_URI')
 
 bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
-blob = bucket.blob('iris-test/model/model.pkl')
+blob = bucket.blob(MODEL_URI)
 blob.download_to_filename('model.pkl')
 
 

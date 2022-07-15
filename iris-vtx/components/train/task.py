@@ -8,21 +8,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import train_test_split
 
-# noinspection PyPackageRequirements
-from google.cloud import storage
-
-PROJECT_ID = os.environ.get("CLOUD_ML_PROJECT_ID", None)
-BUCKET = os.environ.get('GCLOUD_BUCKET')
-OUTPUT_DIR = 'outputs'
-MODEL_PATH = os.path.join(OUTPUT_DIR, 'model.pkl')
-
-bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
-blob = bucket.blob('iris-test/model/model.pkl')
-
 
 @click.command
-@click.option('--data-path', default='data/iris.csv')
-def train(data_path: str):
+@click.option('--data-path', type=str)
+@click.option('--model-path', type=str)
+def train(data_path: str, model_path: str):
     df = pd.read_csv(data_path, header=None)
     label = df.pop(df.shape[1] - 1)
 
@@ -36,10 +26,8 @@ def train(data_path: str):
     # noinspection PyUnresolvedReferences
     ppl.fit(X_train, y_train).predict(X_test)
 
-    with open(MODEL_PATH, 'wb') as f:
+    with open(model_path, 'wb') as f:
         pickle.dump(ppl, f)
-
-    blob.upload_from_filename(MODEL_PATH)
 
 
 if __name__ == '__main__':

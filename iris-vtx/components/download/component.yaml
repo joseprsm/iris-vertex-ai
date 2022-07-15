@@ -1,7 +1,7 @@
 name: Iris data set download
 
 outputs:
-- {name: data}
+- {name: data, type: CSV}
 
 implementation:
   container:

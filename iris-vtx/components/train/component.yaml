@@ -3,6 +3,9 @@ name: train
 inputs:
   - {name: training_data, type: CSV}
 
+outputs:
+  - {name: model, type: Model}
+
 implementation:
   container:
     image: ...
@@ -10,3 +13,5 @@ implementation:
     args:
       - --data-path
       - {inputPath: training_data}
+      - --model-path
+      - {outputPath: model}
