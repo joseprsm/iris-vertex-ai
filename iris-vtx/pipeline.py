@@ -9,7 +9,7 @@ pipeline_root_path = os.environ.get('PIPELINE_ROOT')
 
 
 def get_component(name: str):
-    return load_component_from_file(f'components/{name}/component.yaml')
+    return load_component_from_file(f'iris-vtx/components/{name}/component.yaml')
 
 
 download_op = get_component('download')
@@ -23,7 +23,7 @@ deploy_op = get_component('deploy')
 def pipeline():
     download_task = download_op()
     train_task = train_op(training_data=download_task.outputs['data'])
-    deploy_task = deploy_op(model_uri=train_task.outputs['model'].uri)
+    deploy_task = deploy_op(model_uri=train_task.outputs['model'])
 
 
 compiler.Compiler().compile(pipeline_func=pipeline, package_path='pipeline.json')

@@ -11,8 +11,8 @@ implementation:
       - python
       - deploy.py
     args:
-      - --model-uri
-      - {inputUri: model}
+      - --model
+      - {inputValue: model}
       - --serving-image-uri
       - {inputValue: serving_image_uri}
       - --project
