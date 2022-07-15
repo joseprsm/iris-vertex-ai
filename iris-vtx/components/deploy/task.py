@@ -10,9 +10,9 @@ MODEL_NAME = 'iris-vtx'
 @click.command()
 @click.option('--project', type=str)
 @click.option('--region', type=str)
-@click.option('--model', type=str)
+@click.option('--model-uri', type=str)
 @click.option('--serving-image-uri', type=str)
-def deploy(project, region, model, serving_image_uri):
+def deploy(project, region, model_uri, serving_image_uri):
 
     endpoint = create_endpoint(project, region)
 
@@ -22,7 +22,7 @@ def deploy(project, region, model, serving_image_uri):
         serving_container_health_route="/health",
         serving_container_predict_route="/predict",
         serving_container_environment_variables={
-            "MODEL_URI": model.uri,
+            "MODEL_URI": model_uri,
         },
     )
 
