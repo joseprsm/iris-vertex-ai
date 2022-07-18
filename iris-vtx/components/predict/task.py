@@ -13,16 +13,13 @@ from google.cloud import storage
 
 app = FastAPI()
 
-PROJECT_ID = os.environ.get("CLOUD_ML_PROJECT_ID", None)
-BUCKET = os.environ.get('GCLOUD_BUCKET')
-MODEL_URI = os.environ.get('MODEL_URI')
+MODEL_URI = os.environ['MODEL_URI']
+MODEL_PATH = MODEL_URI
 
-bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
-blob = bucket.blob(MODEL_URI)
-blob.download_to_filename('model.pkl')
+print(MODEL_PATH)
 
 
-with open('model.pkl', 'rb') as f:
+with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
 
 

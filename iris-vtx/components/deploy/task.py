@@ -22,7 +22,7 @@ def deploy(project, region, model_uri, serving_image_uri):
         serving_container_health_route="/health",
         serving_container_predict_route="/predict",
         serving_container_environment_variables={
-            "MODEL_URI": model_uri,
+            "MODEL_URI": "$(AIP_STORAGE_URI)",
         },
         location=region
     )
