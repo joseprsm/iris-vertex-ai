@@ -13,12 +13,12 @@ from google.cloud import storage
 
 app = FastAPI()
 
-PROJECT_ID = os.environ.get("CLOUD_ML_PROJECT_ID", None)
-BUCKET = os.environ.get('GCLOUD_BUCKET')
 MODEL_URI = os.environ.get('MODEL_URI')
+BUCKET_NAME = MODEL_URI.split('//')[1].split('/')[0]
+BLOB_LOC = os.path.join('/'.join(MODEL_URI.split('//')[1].split('/')[1:]), 'model.pkl')
 
-bucket = storage.Client(project=PROJECT_ID).bucket(BUCKET)
-blob = bucket.blob(MODEL_URI)
+bucket = storage.Client().bucket(BUCKET_NAME)
+blob = bucket.blob('/'.join(BLOB_LOC))
 blob.download_to_filename('model.pkl')
 
 
