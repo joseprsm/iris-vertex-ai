@@ -11,8 +11,8 @@ from sklearn.model_selection import train_test_split
 
 @click.command
 @click.option('--data-path', type=str)
-@click.option('--model-path', type=str)
-def train(data_path: str, model_path: str):
+@click.option('--model-dir', type=str)
+def train(data_path: str, model_dir: str):
     df = pd.read_csv(data_path, header=None)
     label = df.pop(df.shape[1] - 1)
 
@@ -25,6 +25,9 @@ def train(data_path: str, model_path: str):
 
     # noinspection PyUnresolvedReferences
     ppl.fit(X_train, y_train).predict(X_test)
+
+    os.makedirs(model_dir)
+    model_path = os.path.join(model_dir, 'model.pkl')
 
     with open(model_path, 'wb') as f:
         pickle.dump(ppl, f)
