@@ -18,7 +18,7 @@ BUCKET_NAME = MODEL_URI.split('//')[1].split('/')[0]
 BLOB_LOC = os.path.join('/'.join(MODEL_URI.split('//')[1].split('/')[1:]), 'model.pkl')
 
 bucket = storage.Client().bucket(BUCKET_NAME)
-blob = bucket.blob('/'.join(BLOB_LOC))
+blob = bucket.blob(BLOB_LOC)
 blob.download_to_filename('model.pkl')
 
 
