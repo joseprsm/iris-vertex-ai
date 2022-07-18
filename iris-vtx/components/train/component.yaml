@@ -13,5 +13,5 @@ implementation:
     args:
       - --data-path
       - {inputPath: training_data}
-      - --model-path
+      - --model-dir
       - {outputPath: model}
