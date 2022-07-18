@@ -1,8 +1,10 @@
+name: deploy
+
 inputs:
-  - {name: model}
-  - {name: serving_image_uri}
-  - {name: project}
-  - {name: region}
+  - {name: model, type: Model}
+  - {name: serving_image_uri, type: String}
+  - {name: project, type: String}
+  - {name: region, type: String}
 
 implementation:
   container:
@@ -11,8 +13,8 @@ implementation:
       - python
       - deploy.py
     args:
-      - --model
-      - {inputValue: model}
+      - --model-uri
+      - {inputUri: model}
       - --serving-image-uri
       - {inputValue: serving_image_uri}
       - --project
