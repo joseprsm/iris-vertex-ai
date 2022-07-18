@@ -24,6 +24,7 @@ def deploy(project, region, model_uri, serving_image_uri):
         serving_container_environment_variables={
             "MODEL_URI": model_uri,
         },
+        location=region
     )
 
     _ = model_upload.deploy(
