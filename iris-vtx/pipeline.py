@@ -23,7 +23,12 @@ deploy_op = get_component('deploy')
 def pipeline():
     download_task = download_op()
     train_task = train_op(training_data=download_task.outputs['data'])
-    deploy_task = deploy_op(model_uri=train_task.outputs['model'])
+    deploy_task = deploy_op(
+        model=train_task.outputs['model'],
+        serving_image_uri=...,
+        project=project_id,
+        region='europe-west3'
+    )
 
 
 compiler.Compiler().compile(pipeline_func=pipeline, package_path='pipeline.json')
