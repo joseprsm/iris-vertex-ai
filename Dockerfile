@@ -14,11 +14,9 @@ ENTRYPOINT ["python", "train.py"]
 
 FROM base AS predict
 
-ARG PORT=8080
-
 COPY iris-vtx/components/predict/task.py predict.py
 
-ENTRYPOINT ["uvicorn", "predict:app", "--reload", "--host=0.0.0.0", "--port", "$PORT"]
+ENTRYPOINT ["uvicorn", "predict:app", "--reload", "--host=0.0.0.0", "--port", "8080"]
 
 FROM python:3.10 AS deploy
 
