@@ -1,3 +1,4 @@
+import os
 import click
 
 from google.cloud import aiplatform as aip
@@ -5,6 +6,7 @@ from google.cloud import aiplatform as aip
 ENDPOINT_NAME = 'iris-deploy'
 DISPLAY_NAME = 'iris-vtx'
 MODEL_NAME = 'iris-vtx'
+SERVICE_ACCOUNT = os.environ['SERVICE_ACCOUNT']
 
 
 @click.command()
@@ -32,6 +34,7 @@ def deploy(project, region, model_uri, serving_image_uri):
         endpoint=endpoint,
         traffic_split={"0": 100},
         deployed_model_display_name=DISPLAY_NAME,
+        service_account=SERVICE_ACCOUNT
     )
 
 

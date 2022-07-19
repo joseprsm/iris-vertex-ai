@@ -22,4 +22,7 @@ FROM python:3.10 AS deploy
 
 RUN pip install click google-cloud-aiplatform
 
+ARG SERVICE_ACCOUNT
+ENV SERVICE_ACCOUNT=$SERVICE_ACCOUNT
+
 COPY iris-vtx/components/deploy/task.py deploy.py
